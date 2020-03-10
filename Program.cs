@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +15,14 @@ namespace MTG
                 List<Tournament> results = new List<Tournament>();
                 int counter = 0;
                 string ln;
-                while ((ln = file.ReadLine()) != "All") {}
+                ln = file.ReadLine();
+                while (ln != "All")
+                {
+                    if (ln.Contains("Events Only")){ break; }
+                    ln = file.ReadLine();
+                }
                 file.ReadLine();
-                while ((ln = file.ReadLine()) != null && !ln.Contains("You are a Planeswalker"))
+                while ((ln = file.ReadLine()) != null && !ln.Contains("You are a Planeswalker") && !ln.Contains("Hasbro©"))
                 {
                     string lp = ln;
                     while (!ln.Contains("Event Type:"))
@@ -58,20 +63,24 @@ namespace MTG
                     while (!ln.Contains("Correct this event.")) { ln=file.ReadLine(); }
                     counter++;
                     Console.WriteLine("=======================\nProcessed: "+counter);
+                    Console.WriteLine(temp.Date);
                 }
                 Console.WriteLine("\n\n\nFinished Reading.\n======================\n");
                 file.Close();
 
                 string writeMe = "Event,Date,Format,Player,Result\n";
+                string tourny = "Event,Date,Format,Players,Place\n";
 
                 results.ForEach(delegate (Tournament tour)
                 {
+                    tourny += tour.SN + "," + tour.Date + "," + tour.Format + "," + tour.Players + "," + tour.Place + "\n";
                     tour.Matches.ForEach(delegate (Games game)
                     {
                         writeMe += tour.SN + "," + tour.Date + "," + tour.Format + "," + game.Opponent + "," + game.Result + "\n";
                     });
                 });
-                System.IO.File.WriteAllText("results.csv", writeMe);
+                System.IO.File.WriteAllText("Games.csv", writeMe);
+                System.IO.File.WriteAllText("Tournaments.csv", tourny);
             }
             Console.ReadKey();
         }

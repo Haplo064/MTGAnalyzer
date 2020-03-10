@@ -11,3 +11,5 @@ Getting  Started:
 * Press ctrl+a to select the data followed by ctrl+c to copy the data
 * Paste the data into a text file, call it `mtg.txt`
 * Run `MTG.exe`
+
+You should now have two files, `games.csv` and `tournaments.csv` to wrangle the data with!

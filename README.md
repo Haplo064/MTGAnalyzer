@@ -7,6 +7,7 @@ Getting  Started:
 * While in Chrome browser Press `ctrl+shift+j`
 * In the console that opens run the command: `$("a.Expand").click()`
 * Make sure you gave the previous command enough time to run! It takes a minute.
+* Close the console.
 * Press ctrl+a to select the data followed by ctrl+c to copy the data
 * Paste the data into a text file, call it `mtg.txt`
 * Run `MTG.exe`
